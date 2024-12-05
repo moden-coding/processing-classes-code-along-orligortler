@@ -12,7 +12,7 @@ public class Bubble {
     public Bubble(int xPos, int yPos, PApplet c) {
         x = xPos;
         y = yPos;
-        size = 50;
+        size = 250;
         canvas = c;
         speed = 5;
         color = canvas.color(0, 255, 0);
@@ -32,12 +32,25 @@ public class Bubble {
         x += speed;
         if (x + size / 2 > canvas.width || x - size / 2 < 0) {
             speed = -speed;
-            // color = randomColor();
-            health--;
         }
     }
 
     public int randomColor() {
         return canvas.color(canvas.random(255), canvas.random(255), canvas.random(255));
+    }
+
+    public int getSize(){
+        return size;
+    }
+    public boolean checkTouch(int mouseX, int mouseY){
+        float distanceFromCenetr = canvas.dist(x, y, mouseX, mouseY);
+        if(distanceFromCenetr < size/2){
+            health--;
+        }
+        if(health>0){
+            return true;
+        } else {
+            return false;
+        }
     }
 }
